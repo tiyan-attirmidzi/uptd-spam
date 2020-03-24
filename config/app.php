@@ -2,6 +2,8 @@
 
 return [
 
+    'nameApp' => 'UPTD SPAM KABUPATEN MUNA BARAT',
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
