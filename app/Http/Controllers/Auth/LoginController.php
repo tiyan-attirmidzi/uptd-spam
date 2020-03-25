@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -54,6 +55,7 @@ class LoginController extends Controller
         ];
 
         if (auth()->attempt($credentials)) {
+            Alert::success('Sukses');
             if (auth()->user()->is_admin == User::IS_ADMIN) {
                 return redirect()->route('admin.home');
             }
@@ -62,8 +64,10 @@ class LoginController extends Controller
             }
         }
         else {
-            return redirect()->route('login')->with('message', 'Email atau Password Anda Salah');
+            Alert::error('Terjadi Kesalahan', 'Email dan Password Anda Tidak Sesuai');
+            return redirect()->back();
         }
 
     }
+
 }

@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use App\User;
 use Closure;
+use RealRashid\SweetAlert\Facades\Alert;
 
-class CheckAccess
+class IsOfficer
 {
     /**
      * Handle an incoming request.
@@ -16,10 +17,11 @@ class CheckAccess
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->user()->is_admin == User::IS_ADMIN || auth()->user()->is_admin == User::IS_OFFICER) {
+        if (auth()->user()->is_admin == User::IS_OFFICER) {
             return $next($request);
         }
 
-        return redirect('/')->with('message','Maaf, Akun Anda Tidak Berhak Untuk Mengakses Halaman Ini');
+        Alert::error('Mohon Maaf', 'Anda Tidak Berhak Mengakses');
+        return redirect()->back();
     }
 }
