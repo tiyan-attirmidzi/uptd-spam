@@ -7,10 +7,15 @@
                 </a>
             </li>
             @if (Auth::user()->is_admin == true)
-                <li class="menu-title">Transaksi</li>
-                <li class="">
-                    <a href="">
-                        <i class="menu-icon fa fa-money"></i> Bayar Tagihan
+                <li class="menu-title">Pengguna (User)</li>
+                <li class="{{ Route::currentRouteName() == 'users.create' ? 'active' : null }}">
+                    <a href="{{ route('users.create') }}">
+                        <i class="menu-icon fa fa-plus"></i> Registrasi Pengguna
+                    </a>
+                </li>
+                <li class="{{ Route::currentRouteName() == 'users.index' ? 'active' : null }}">
+                    <a href="{{ route('users.index') }}">
+                        <i class="menu-icon fa fa-user"></i> Data Pengguna
                     </a>
                 </li>
             @endif

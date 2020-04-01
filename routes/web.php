@@ -14,6 +14,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Admin Route
     Route::group(['prefix' => 'admin', 'middleware' => 'is.admin'], function () {
         Route::get('/', 'Admin\ControllerHome@index')->name('admin.home');
+        Route::resource('users', 'Admin\ControllerUsers');
     });
 
     // Officer Route

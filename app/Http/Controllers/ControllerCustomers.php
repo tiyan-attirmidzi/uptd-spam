@@ -23,7 +23,7 @@ class ControllerCustomers extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.mix.customers.create');
     }
 
     /**
