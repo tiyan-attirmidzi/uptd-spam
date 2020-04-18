@@ -22,6 +22,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'Officer\ControllerHome@index')->name('officer.home');
     });
 
+    Route::get('transactions', 'ControllerTransactions@index')->name('transactions.index');
+    Route::post('transactions/check', 'ControllerTransactions@billingCheck')->name('transactions.check');
+    Route::post('transactions/pay', 'ControllerTransactions@pay')->name('transactions.pay');
     Route::resource('customers', 'ControllerCustomers');
+    Route::resource('sop/description_costs', 'ControllerDescriptionCosts');
 
 });
