@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Edit Data Pengguna (User)</strong>
+                            <strong>Ubah Data Pengguna (User)</strong>
                             <small>{{ $item->name }}</small>
                         </div>
                         <div class="card-body card-block">
@@ -39,6 +39,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group form-action">
+                                    <a href="{{ URL::previous() }}" class="btn btn-secondary">Kembali</a>
                                     <button type="submit" class="btn btn-primary">Ubah</button>
                                 </div>
                             </form>

@@ -7,16 +7,17 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Daftar Pengguna (User)</strong>
+                            <strong class="card-title">Uraian Biaya</strong>
                         </div>
                         <div class="card-body">
                             <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nomor Pembayaran</th>
-                                        <th>Nama</th>
-                                        <th>Status Sambungan</th>
+                                        <th>Batas Bawah</th>
+                                        <th>Batas Atas</th>
+                                        <th>Harga</th>
+                                        <th>Deskripsi</th>
                                         <th>Opsi</th>
                                     </tr>
                                 </thead>
@@ -24,26 +25,14 @@
                                     @forelse ($items as $index => $item)
                                         <tr>
                                             <td>{{ $index +1 }}</td>
-                                            <td>{{ $item->billing_number }}</td>
-                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->lower_limit }}</td>
+                                            <td>{{ $item->lower_limit == 21 ? "Dst." : $item->upper_limit }}</td>
+                                            <td>Rp. {{ number_format($item->price) }}</td>
+                                            <td>{{ $item->description }}</td>
                                             <td>
-                                                @if ($item->connection_status == 1)
-                                                    <span class="badge badge-success">Aktif</span>
-                                                @else
-                                                    <span class="badge badge-secondary">Non-Aktif</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('customers.edit', $item->id) }}" class="btn btn-primary btn-sm">
+                                                <a href="{{ route('description_costs.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                                     <i class="fa fa-pencil"></i> Ubah
                                                 </a>
-                                                <form action="{{ route('customers.destroy', $item->id) }}" method="POST" class="d-inline" onclick="return confirm('Anda Yakin Ingin Menghapus?')">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-trash"></i> Hapus
-                                                    </button>
-                                                </form>
                                             </td>
                                         </tr>
                                     @empty

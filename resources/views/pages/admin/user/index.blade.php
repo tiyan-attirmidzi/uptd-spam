@@ -5,11 +5,6 @@
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-12">
-                    @if (session('message'))
-                        <div class="alert alert-success">
-                            {{ session('message') }}
-                        </div>
-                    @endif
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">Daftar Pengguna (User)</strong>
@@ -35,7 +30,7 @@
                                                 @if ($item->is_admin == 1)
                                                     <span class="badge badge-success">Admin</span>
                                                 @else
-                                                    <span class="badge badge-primary">Officer</span>
+                                                    <span class="badge badge-dark">Officer</span>
                                                 @endif
                                             </td>
                                             <td>
