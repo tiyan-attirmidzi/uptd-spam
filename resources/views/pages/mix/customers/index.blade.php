@@ -37,13 +37,9 @@
                                                 <a href="{{ route('customers.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                                     <i class="fa fa-pencil"></i> Ubah
                                                 </a>
-                                                <form action="{{ route('customers.destroy', $item->id) }}" method="POST" class="d-inline" onclick="return confirm('Anda Yakin Ingin Menghapus?')">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-trash"></i> Hapus
-                                                    </button>
-                                                </form>
+                                                <button class="btn btn-danger btn-sm" onclick="deleteConfirm({{ $item->id }})">
+                                                    <i class="fa fa-trash"></i> Hapus
+                                                </button>
                                             </td>
                                         </tr>
                                     @empty
@@ -66,4 +62,41 @@
 
 @push('data-table')
     @include('includes.script_datatable')
+@endpush
+
+@push('alert-confirm-delete')
+    <script>
+        function deleteConfirm(id) {
+
+            swal({
+                title: 'Anda yakin menghapus?',
+                text: 'Data ini akan dihapus secara permanen',
+                icon: 'warning',
+                buttons: ["Batal", "Ya"],
+            }).then(function (e) {
+                if (e.value === false) {
+                    e.dismiss;
+                }
+                else {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                    $.ajax({
+                        type: 'POST',
+                        url: "customers/delete/" + id,
+                        data: { _token : CSRF_TOKEN },
+                        dataType: 'JSON',
+                        success: function (results) {
+                            if (results.success === true) {
+                                swal("Berhasil Dihapus", result.message, "success");
+                            }
+                            else {
+                                swal("Gagal", result.message, "error");
+                            }
+                        }
+                    });
+                }
+            }, function (dismiss) {
+                return false;
+            });
+        }
+    </script>
 @endpush

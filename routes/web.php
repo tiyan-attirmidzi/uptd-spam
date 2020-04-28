@@ -23,9 +23,13 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('transactions', 'ControllerTransactions@index')->name('transactions.index');
+    Route::get('transactions/input/usage/show', 'ControllerTransactions@inputUsageShow')->name('transactions.input.usage.show');
+    Route::post('transactions/input/usage', 'ControllerTransactions@inputUsage')->name('transactions.input.usage');
+    Route::post('transactions/fetch', 'ControllerTransactions@fetchCustomerActive')->name('transactions.fetch');
     Route::post('transactions/check', 'ControllerTransactions@billingCheck')->name('transactions.check');
     Route::post('transactions/pay', 'ControllerTransactions@pay')->name('transactions.pay');
-    Route::resource('customers', 'ControllerCustomers');
+    Route::post('customers/delete/{$id}', 'ControllerCustomers@delete')->name('customers.delete');
+    Route::resource('customers', 'ControllerCustomers')->except(['destroy']);
     Route::resource('sop/description_costs', 'ControllerDescriptionCosts');
 
 });

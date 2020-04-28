@@ -16,6 +16,7 @@
     <title>UPTD SPAM KAB. MUNA BARAT DASHBOARD</title>
     <meta name="description" content="ShaynaAdmin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- Include Style --}}
     @include('includes.style')
 </head>

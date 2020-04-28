@@ -33,10 +33,15 @@
             <li class="menu-title">SOP</li>
             <li class="{{ Route::currentRouteName() == 'description_costs.index' ? 'active' : null }}">
                 <a href="{{ route('description_costs.index') }}">
-                    <i class="menu-icon fa fa-money"></i> Uraian Biaya
+                    <i class="menu-icon fa fa-usd"></i> Uraian Biaya
                 </a>
             </li>
             <li class="menu-title">Transaksi</li>
+            <li class="{{ Route::currentRouteName() == 'transactions.input.usage.show' ? 'active' : null }}">
+                <a href="{{ route('transactions.input.usage.show') }}">
+                    <i class="menu-icon fa fa-pencil"></i> Input Tagihan
+                </a>
+            </li>
             <li class="{{ Route::currentRouteName() == 'transactions.index' ? 'active' : null }}">
                 <a href="{{ route('transactions.index') }}">
                     <i class="menu-icon fa fa-money"></i> Bayar Tagihan
