@@ -127,8 +127,10 @@ class ControllerCustomers extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function delete($id)
+    public function delete(Request $request)
     {
-        return "a";
+      Customer::find($request->id)->delete();
+      toast('Data Pelanggan Berhasil Diubah','success')->autoClose(3000);
+      return redirect()->route('customers.index');
     }
 }

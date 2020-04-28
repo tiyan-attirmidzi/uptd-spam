@@ -13,7 +13,7 @@
                         <i class="menu-icon fa fa-plus"></i> Registrasi Pengguna
                     </a>
                 </li>
-                <li class="{{ Route::currentRouteName() == 'users.index' ? 'active' : null || Route::currentRouteName() == 'users.edit' ? 'active' : null }}">
+                <li class="{{ Route::currentRouteName() == 'users.index' ? 'active' : null or Route::currentRouteName() == 'users.edit' ? 'active' : null }}">
                     <a href="{{ route('users.index') }}">
                         <i class="menu-icon fa fa-user"></i> Data Pengguna
                     </a>
@@ -25,7 +25,7 @@
                     <i class="menu-icon fa fa-plus"></i> Registrasi Pelanggan
                 </a>
             </li>
-            <li class="{{ Route::currentRouteName() == 'customers.index' ? 'active' : null  || Route::currentRouteName() == 'customers.edit' ? 'active' : null }}">
+            <li class="{{ Route::currentRouteName() == 'customers.index' ? 'active' : null  or Route::currentRouteName() == 'customers.edit' ? 'active' : null }}">
                 <a href="{{ route('customers.index') }}">
                     <i class="menu-icon fa fa-group"></i> Data Pelanggan
                 </a>

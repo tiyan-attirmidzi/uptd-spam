@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('transactions/fetch', 'ControllerTransactions@fetchCustomerActive')->name('transactions.fetch');
     Route::post('transactions/check', 'ControllerTransactions@billingCheck')->name('transactions.check');
     Route::post('transactions/pay', 'ControllerTransactions@pay')->name('transactions.pay');
-    Route::post('customers/delete/{$id}', 'ControllerCustomers@delete')->name('customers.delete');
+    Route::post('customers/delete', 'ControllerCustomers@delete');
     Route::resource('customers', 'ControllerCustomers')->except(['destroy']);
     Route::resource('sop/description_costs', 'ControllerDescriptionCosts');
 
