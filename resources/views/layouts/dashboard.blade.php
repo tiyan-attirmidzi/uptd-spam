@@ -38,6 +38,31 @@
         @include('includes.navbar')
         <!-- /#header -->
 
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>Beranda</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="page-header float-right">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li><a href="#">Beranda</a></li>
+                                    <li><a href="#">Icons</a></li>
+                                    <li class="active">FontAwesome</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Content -->
         {{-- Include Content --}}
         @yield('content')
@@ -63,8 +88,8 @@
 
 
     {{-- Include Script --}}
-    @include('includes.script')
     @include('sweetalert::alert')
+    @include('includes.script')
 
 </body>
 </html>

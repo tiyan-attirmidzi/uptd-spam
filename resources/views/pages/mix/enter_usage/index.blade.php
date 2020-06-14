@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Input Tagihan Bulanan</strong> <small id="mount-name"></small>
+                            <strong>Input Tagihan Bulanan</strong> <small id="month-name"></small>
                         </div>
                         <div class="card-body card-block">
                             <form action="{{ route('transactions.input.usage') }}" method="POST">
@@ -34,8 +34,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="usage" class="form-control-label">Pemakaian (M<sup>3</sup>)<span class="text-danger"> *</span></label>
-                                    <input type="number" name="usage" id="usage" value="{{ old('usage') }}" class="form-control @error('usage') is-invalid @enderror" placeholder="Masukkan Pemakaian">
+                                    <label for="usage" class="form-control-label">Meteran Pengguna Saat Ini (M<sup>3</sup>)<span class="text-danger"> *</span></label>
+                                    <input type="number" name="usage" id="usage" value="{{ old('usage') }}" class="form-control @error('usage') is-invalid @enderror" placeholder="Masukkan Meteran">
                                     @error('usage')
                                         <div class="text-danger">
                                             {{ $message }}
@@ -57,11 +57,6 @@
 @push('script-chosen')
 
     <script type="text/javascript">
-
-        timeNow = new Date();
-        arrBulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-        var nameMonth = document.getElementById("mount-name");
-        nameMonth.innerHTML = arrBulan[timeNow.getMonth()];
 
         jQuery(document).ready(function($){
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

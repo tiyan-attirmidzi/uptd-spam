@@ -20,5 +20,13 @@ class Customer extends Model
         //
     ];
 
+    public function transactions() {
+        return $this->hasMany('App\Models\Transaction');
+    }
+
+    public function usageCustomer() {
+        return $this->hasOne('App\Models\UsageCustomer', 'id_customer', 'id');
+    }
+
 
 }

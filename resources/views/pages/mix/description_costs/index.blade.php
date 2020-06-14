@@ -10,7 +10,7 @@
                             <strong class="card-title">Uraian Biaya</strong>
                         </div>
                         <div class="card-body">
-                            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -52,7 +52,3 @@
     </div>
 @endsection
 
-
-@push('data-table')
-    @include('includes.script_datatable')
-@endpush

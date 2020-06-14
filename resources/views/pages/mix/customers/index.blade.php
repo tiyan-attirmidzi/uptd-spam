@@ -37,9 +37,9 @@
                                                 <a href="{{ route('customers.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                                     <i class="fa fa-pencil"></i> Ubah
                                                 </a>
-                                                <button class="btn btn-danger btn-sm deleteConfirm" data-id="{{ $item->id }}">
+                                                <a href="{{ route('customers.destroy', $item->id) }}" class="btn btn-danger btn-sm deleteConfirm" data-id="{{ $item->id }}">
                                                     <i class="fa fa-trash"></i> Hapus
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
                                     @empty
@@ -65,38 +65,42 @@
 @endpush
 
 @push('alert-confirm-delete')
-    <script>
+<script>
 
-      $(document).ready(function(){
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
+    $(document).ready(function(){
 
         $('.deleteConfirm').click(function(e){
-          e.preventDefault();
-          var id = $(this).data('id');
-          console.log(id);
-          swal({
-              title: 'Anda yakin menghapus?',
-              text: 'Data ini akan dihapus secara permanen',
-              icon: 'warning',
-              buttons: ["Batal", "Ya"],
-          }).then(function (e) {
-            $.ajax({
-              type: "POST",
-              url: "{{ url('customers/delete') }}",
-              data: {id:id},
-              success: function (data) {
-                console.log("sukses");
-              },
-              error: function (e) {
-                // console.log(e);
-              }
+            e.preventDefault();
+            var id = $(this).data('id');
+            var url = e.target;
+            var token = $("meta[name='csrf-token']").attr("content");
+            // console.log(url.href);
+            swal({
+                title: 'Anda yakin menghapus?',
+                text: 'Data ini akan dihapus secara permanen',
+                icon: 'warning',
+                buttons: ["Batal", "Ya"],
+                dangerMode: true,
+            }).then(function (e) {
+                if (e === true) {
+                    $.ajax({
+                        url: url.href,
+                        type: 'POST',
+                        data: {
+                            id : id,
+                            _token : token,
+                            _method : 'DELETE'
+                        },
+                        success: function (data) {
+                            location.reload();
+                        },
+                        error: function (e) {
+                            // console.log(e);
+                        }
+                    });
+                }
             });
-          });
         });
-      });
-    </script>
+    });
+</script>
 @endpush

@@ -14,10 +14,9 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Nomor Pembayaran</th>
                                         <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Hak Akses</th>
-                                        <th>Hak Akses</th>
+                                        <th>Status</th>
                                         <th>Opsi</th>
                                     </tr>
                                 </thead>
@@ -25,22 +24,20 @@
                                     @forelse ($items as $index => $item)
                                         <tr>
                                             <td>{{ $index +1 }}</td>
+                                            <td>{{ $item->billing_number }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td>{{ $item->created_at->format('M') }}</td>
-
                                             <td>
-                                                @if ($item->is_admin == 1)
-                                                    <span class="badge badge-success">Admin</span>
+                                                @if ($item->connection_status == 1)
+                                                    <span class="badge badge-success">Aktif</span>
                                                 @else
-                                                    <span class="badge badge-dark">Officer</span>
+                                                    <span class="badge badge-secondary">Non-Aktif</span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('users.edit', $item->id) }}" class="btn btn-primary btn-sm">
+                                                <a href="{{ route('customers.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                                     <i class="fa fa-pencil"></i> Ubah
                                                 </a>
-                                                <a href="{{ route('users.destroy', $item->id) }}" class="btn btn-danger btn-sm deleteConfirm" data-id="{{ $item->id }}">
+                                                <a href="{{ route('customers.destroy', $item->id) }}" class="btn btn-danger btn-sm deleteConfirm" data-id="{{ $item->id }}">
                                                     <i class="fa fa-trash"></i> Hapus
                                                 </a>
                                             </td>
@@ -68,42 +65,42 @@
 @endpush
 
 @push('alert-confirm-delete')
-    <script>
+<script>
 
-        $(document).ready(function(){
+    $(document).ready(function(){
 
-            $('.deleteConfirm').click(function(e){
-                e.preventDefault();
-                var id = $(this).data('id');
-                var url = e.target;
-                var token = $("meta[name='csrf-token']").attr("content");
-                // console.log(url.href);
-                swal({
-                    title: 'Anda yakin menghapus?',
-                    text: 'Data ini akan dihapus secara permanen',
-                    icon: 'warning',
-                    buttons: ["Batal", "Ya"],
-                    dangerMode: true,
-                }).then(function (e) {
-                    if (e === true) {
-                        $.ajax({
-                            url: url.href,
-                            type: 'POST',
-                            data: {
-                                id : id,
-                                _token : token,
-                                _method : 'DELETE'
-                            },
-                            success: function (data) {
-                                location.reload();
-                            },
-                            error: function (e) {
-                                // console.log(e);
-                            }
-                        });
-                    }
-                });
+        $('.deleteConfirm').click(function(e){
+            e.preventDefault();
+            var id = $(this).data('id');
+            var url = e.target;
+            var token = $("meta[name='csrf-token']").attr("content");
+            // console.log(url.href);
+            swal({
+                title: 'Anda yakin menghapus?',
+                text: 'Data ini akan dihapus secara permanen',
+                icon: 'warning',
+                buttons: ["Batal", "Ya"],
+                dangerMode: true,
+            }).then(function (e) {
+                if (e === true) {
+                    $.ajax({
+                        url: url.href,
+                        type: 'POST',
+                        data: {
+                            id : id,
+                            _token : token,
+                            _method : 'DELETE'
+                        },
+                        success: function (data) {
+                            location.reload();
+                        },
+                        error: function (e) {
+                            // console.log(e);
+                        }
+                    });
+                }
             });
         });
-    </script>
+    });
+</script>
 @endpush

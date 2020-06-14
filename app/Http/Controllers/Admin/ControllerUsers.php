@@ -113,8 +113,5 @@ class ControllerUsers extends Controller
     {
         $item = User::findOrFail($id);
         $item->delete();
-
-        toast('Pengguna Berhasil Dihapus','success')->autoClose(3000);
-        return redirect()->route('users.index');
     }
 }

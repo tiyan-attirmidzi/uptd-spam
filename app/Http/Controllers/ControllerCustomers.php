@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RequestCustomer;
 use App\Models\Customer;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -126,11 +127,9 @@ class ControllerCustomers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function delete(Request $request)
+    public function destroy($id)
     {
-      Customer::find($request->id)->delete();
-      toast('Data Pelanggan Berhasil Diubah','success')->autoClose(3000);
-      return redirect()->route('customers.index');
+        $item = Customer::findOrFail($id);
+        $item->delete();
     }
 }

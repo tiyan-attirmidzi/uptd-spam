@@ -11,7 +11,7 @@
                             <small>{{ $item->name }}</small>
                         </div>
                         <div class="card-body card-block">
-                            <form action="{{ route('customers.update', $item->id) }}" method="POST">
+                            <form action="{{ route('other_costs.update', $item->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">

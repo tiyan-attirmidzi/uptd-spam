@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -30,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+//    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -40,6 +41,17 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function redirectTo()
+    {
+        if (Auth::user()->is_admin == User::IS_ADMIN) {
+            $this->redirectTo = route('admin.home');
+            return $this->redirectTo;
+        }
+
+        $this->redirectTo = route('officer.home');
+        return $this->redirectTo;
     }
 
     public function login(Request $request)
@@ -68,6 +80,11 @@ class LoginController extends Controller
             return redirect()->back();
         }
 
+    }
+
+    public function dashboard(Request $request)
+    {
+        return "berhasil";
     }
 
 }
